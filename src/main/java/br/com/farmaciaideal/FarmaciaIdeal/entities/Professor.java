@@ -1,8 +1,11 @@
 package br.com.farmaciaideal.FarmaciaIdeal.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,6 +16,10 @@ public class Professor implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "professor")
+    private List<Disciplina> disciplinas = new ArrayList<>();
 
     public Professor() {
     }
@@ -36,6 +43,10 @@ public class Professor implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public List<Disciplina> getDisciplinas() {
+        return disciplinas;
     }
 
     @Override

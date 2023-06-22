@@ -1,5 +1,6 @@
 package br.com.farmaciaideal.FarmaciaIdeal.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -15,12 +16,22 @@ public class Disciplina implements Serializable {
     private Long id;
     private String nome;
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "turma_id")
+    private Turma turma;
+
+    @ManyToOne
+    @JoinColumn(name = "professor_id")
+    private Professor professor;
     public Disciplina() {
     }
 
-    public Disciplina(Long id, String nome) {
+    public Disciplina(Long id, String nome, Turma turma,Professor professor) {
         this.id = id;
         this.nome = nome;
+        this.turma = turma;
+        this.professor = professor;
     }
 
     public Long getId() {
@@ -37,6 +48,22 @@ public class Disciplina implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Turma getTurma() {
+        return turma;
+    }
+
+    public void setTurma(Turma turma) {
+        this.turma = turma;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
 
     @Override

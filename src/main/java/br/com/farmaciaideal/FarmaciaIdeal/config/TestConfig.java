@@ -22,6 +22,10 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private TurmaRepository turmaRepository;
+    @Autowired
+    private DisciplinaRepository disciplinaRepository;
+    @Autowired
+    private ProfessorRepository professorRepository;
 
 
     @Override
@@ -39,8 +43,11 @@ public class TestConfig implements CommandLineRunner {
         alunoRepository.save(a1);
         alunoRepository.save(a2);
 
+        Professor p1 = new Professor(null, "Jorge");
+        professorRepository.save(p1);
 
-
+        Disciplina d1 = new Disciplina(null, "Anatonia",t1,p1);
+        disciplinaRepository.save(d1);
 
     }
 }

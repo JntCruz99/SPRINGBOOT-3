@@ -23,6 +23,9 @@ public class Turma implements Serializable {
     @OneToMany(mappedBy = "turma")
     private List<Aluno> alunos = new ArrayList<>();
 
+    @OneToMany(mappedBy = "turma")
+    private List<Disciplina> disciplinas = new ArrayList<>();
+
     public Turma() {
     }
 
@@ -56,6 +59,9 @@ public class Turma implements Serializable {
         this.curso = curso;
     }
 
+    public List<Disciplina> getDisciplinas() {
+        return disciplinas;
+    }
 
 
     @Override
