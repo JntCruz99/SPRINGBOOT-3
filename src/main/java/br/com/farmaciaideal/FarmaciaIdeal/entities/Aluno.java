@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -19,6 +21,10 @@ public class Aluno implements Serializable {
     @ManyToOne
     @JoinColumn(name = "turma_id")
     private Turma turma;
+
+
+    @OneToMany(mappedBy = "aluno")
+    private List<Nota> notas = new ArrayList<>();
 
     public Aluno() {
     }
@@ -51,6 +57,10 @@ public class Aluno implements Serializable {
 
     public void setTurma(Turma turma) {
         this.turma = turma;
+    }
+
+    public List<Nota> getNotas() {
+        return notas;
     }
 
     @Override

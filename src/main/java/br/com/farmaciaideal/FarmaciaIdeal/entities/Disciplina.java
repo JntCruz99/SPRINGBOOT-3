@@ -1,9 +1,13 @@
 package br.com.farmaciaideal.FarmaciaIdeal.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,10 +28,15 @@ public class Disciplina implements Serializable {
     @ManyToOne
     @JoinColumn(name = "professor_id")
     private Professor professor;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "disciplina")
+    private List<Nota> notas = new ArrayList<>();
+
     public Disciplina() {
     }
 
-    public Disciplina(Long id, String nome, Turma turma,Professor professor) {
+    public Disciplina(Long id, String nome, Turma turma, Professor professor) {
         this.id = id;
         this.nome = nome;
         this.turma = turma;
@@ -62,9 +71,15 @@ public class Disciplina implements Serializable {
         return professor;
     }
 
+    public List<Nota> getNotas() {
+        return notas;
+    }
+
     public void setProfessor(Professor professor) {
         this.professor = professor;
     }
+
+
 
     @Override
     public boolean equals(Object o) {
